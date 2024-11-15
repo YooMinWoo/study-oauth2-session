@@ -42,13 +42,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if(existData == null){
             UserEntity user = new UserEntity();
             user.setUsername(username);
-            user.setEmail(oAuth2Response.getEmail());
+            user.setOauth_email(oAuth2Response.getEmail());
             user.setRole("ROLE_USER");
+            user.setProvider(oAuth2Response.getProvider());
+            user.setPhone_number(oAuth2Response.getMobile());
 
             userRepository.save(user);
         }else{
             role = existData.getRole();
-            existData.setEmail(oAuth2Response.getEmail());
+            existData.setOauth_email(oAuth2Response.getEmail());
             userRepository.save(existData);
         }
 
